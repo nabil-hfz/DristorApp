@@ -1,7 +1,13 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿
+using System.ComponentModel;
+using DristorApp.Controllers;
+using DristorApp.Data.db;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<AppDbContext>();
 
 var app = builder.Build();
 
@@ -20,9 +26,18 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}");
+
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+         name: "HomePage2",
+         pattern: "Home/Page",
+         defaults: new { controller = "Home", action = "Index" });
+
+//app.MapControllerRoute(
+//         name: "UsersPage",
+//         pattern: "Users/Page",
+//         defaults: new { controller = "Users", action = "GetUsers" });
 
 app.Run();
-

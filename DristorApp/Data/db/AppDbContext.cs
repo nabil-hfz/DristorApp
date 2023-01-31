@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Configuration;
 using DristorApp.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using static NuGet.Packaging.PackagingConstants;
 
 namespace DristorApp.Data.db
@@ -14,7 +16,9 @@ namespace DristorApp.Data.db
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-			base.OnConfiguring(optionsBuilder);
+            //optionsBuilder.UseSqlServer(@"Stringul de Conexiune");
+            base.OnConfiguring(optionsBuilder);
+
 			optionsBuilder.EnableSensitiveDataLogging();
 		}
 
@@ -22,11 +26,11 @@ namespace DristorApp.Data.db
 		{
 			base.OnModelCreating(builder);
 
-			builder
-				.Entity<OrderStatusUpdate>()
-				.HasOne(e => e.Order)
-				.WithMany(e => e.OrderStatusUpdates)
-				.OnDelete(DeleteBehavior.Cascade);
+			//builder
+			//	.Entity<OrderStatusUpdate>()
+			//	.HasOne(e => e.Order)
+			//	.WithMany(e => e.OrderStatusUpdates)
+			//	.OnDelete(DeleteBehavior.Cascade);
 
 
 			//builder
