@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -9,9 +9,69 @@
   <ItemGroup>
     <None Remove="Data\" />
     <None Remove="Data\Models\" />
+    <None Remove="Data\DTOs\" />
+    <None Remove="Data\DTOs\Address\" />
+    <None Remove="Data\DTOs\CartItem\" />
+    <None Remove="Data\DTOs\Coupon\" />
+    <None Remove="Data\DTOs\Order\" />
+    <None Remove="Data\DTOs\Orderitema\" />
+    <None Remove="Data\DTOs\Porduct\" />
+    <None Remove="Data\DTOs\ProductVariant\" />
+    <None Remove="Data\DTOs\User\" />
+    <None Remove="Repositories\" />
+    <None Remove="Repositories\OrderRepository\" />
+    <None Remove="Repositories\BaseRepository\" />
+    <None Remove="Data\db\" />
+    <None Remove="Microsoft.EntityFrameworkCore" />
+    <None Remove="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="Swashbuckle.AspNetCore" />
+    <None Remove="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
+    <None Remove="Microsoft.EntityFrameworkCore.Design" />
+    <None Remove="Microsoft.EntityFrameworkCore.Tools" />
+    <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+    <None Remove="Repositories\UserRepository\" />
+    <None Remove="Repositories\Roles\" />
+    <None Remove="Repositories\ProductRepository\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Data\Models\" />
+    <Folder Include="Data\DTOs\" />
+    <Folder Include="Data\DTOs\Address\" />
+    <Folder Include="Data\DTOs\CartItem\" />
+    <Folder Include="Data\DTOs\Coupon\" />
+    <Folder Include="Data\DTOs\Order\" />
+    <Folder Include="Data\DTOs\Orderitem\" />
+    <Folder Include="Data\DTOs\Porduct\" />
+    <Folder Include="Data\DTOs\ProductVariant\" />
+    <Folder Include="Data\DTOs\User\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Repositories\OrderRepository\" />
+    <Folder Include="Repositories\BaseRepository\" />
+    <Folder Include="Data\db\" />
+    <Folder Include="Repositories\UserRepository\" />
+    <Folder Include="Repositories\Roles\" />
+    <Folder Include="Repositories\ProductRepository\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.3" />
   </ItemGroup>
 </Project>

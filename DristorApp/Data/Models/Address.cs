@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations
+;
 namespace DristorApp.Data.Models
 {
     public class Address

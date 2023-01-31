@@ -12,6 +12,7 @@ namespace DristorApp.Data.Models
 		public int Discount { set; get; }
 
 		public User User { set; get; }
+
 		public OrderItem OrderItem { set; get; }
     }
 }
