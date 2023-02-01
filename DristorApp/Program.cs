@@ -2,12 +2,16 @@
 using System.ComponentModel;
 using DristorApp.Controllers;
 using DristorApp.Data.db;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>();
+// builder.Services.AddDbContext<AppDbContext>();
 
 var app = builder.Build();
 
@@ -30,14 +34,30 @@ app.UseAuthorization();
 //    name: "default",
 //    pattern: "{controller=Home}/{action=Index}");
 
+
+/*app.MapControllerRoute(
+     name: "default",
+     pattern: "{controller=Home}/{action=Index}");*/
+
 app.MapControllerRoute(
-         name: "HomePage2",
+          name: "default",
          pattern: "Home/Page",
          defaults: new { controller = "Home", action = "Index" });
 
-//app.MapControllerRoute(
-//         name: "UsersPage",
-//         pattern: "Users/Page",
-//         defaults: new { controller = "Users", action = "GetUsers" });
+/*app.MapControllerRoute(
+         name: "users_page",
+         pattern: "Users/Page",
+         defaults: new { controller = "Users", action = "GetUsers" });
+
+app.MapControllerRoute(
+         name: "user_page",
+         pattern: "Users/AddUser",
+         defaults: new { controller = "Users", action = "AddUser" });*/
+/*app.MapControllerRoute(
+     name: "user_add",
+     pattern: "{controller=Users}/{action=AddUser}");
+*/
 
 app.Run();
+// setx DristorDbUserConn Host=localhost;Port=5432;Database=DristorApp;Username=DristorApp;Password=Admin@123456
+

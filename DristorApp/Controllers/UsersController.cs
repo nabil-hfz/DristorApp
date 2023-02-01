@@ -46,7 +46,7 @@ namespace DristorApp.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{id")]
+        /*[HttpGet("{id")]
         public async Task<ActionResult<UserDTO>> GetUser(int id)
         {
             var result = await _userRepository.GetByIdAsync(id);
@@ -67,7 +67,7 @@ namespace DristorApp.Controllers
             }; ;
 
             return Ok(users);
-        }
+        }*/
 
         [HttpPost]
         public async Task<ActionResult<User>> AddUser([FromBody] UserDTO userDTO)
@@ -94,7 +94,7 @@ namespace DristorApp.Controllers
 
         }
 
-        [HttpPut("{id}")]
+        /*[HttpPut("{id}")]
         public async Task<ActionResult<User>> UpdateUser(int id, UserDTO userDTO)
         {
 
@@ -160,6 +160,7 @@ namespace DristorApp.Controllers
 
             return NoContent();
         }
+    }*/
     }
 }
 

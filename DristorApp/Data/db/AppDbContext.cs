@@ -3,44 +3,46 @@ using System.Configuration;
 using DristorApp.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+
 using static NuGet.Packaging.PackagingConstants;
 
 namespace DristorApp.Data.db
 {
-	public class AppDbContext : IdentityDbContext<User, Role, int>
-	{
-		public AppDbContext(DbContextOptions<AppDbContext> options) :
-			base(options)
-		{
-		}
+    public class AppDbContext : IdentityDbContext<User, Role, int>
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options) :
+            base(options)
+        {
+        }
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            //optionsBuilder.UseSqlServer(@"Stringul de Conexiune");
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
             base.OnConfiguring(optionsBuilder);
 
-			optionsBuilder.EnableSensitiveDataLogging();
-		}
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=DristorApp;Username=DristorApp;Password=Admin@123456");
 
-		protected override void OnModelCreating(ModelBuilder builder)
-		{
-			base.OnModelCreating(builder);
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
 
-			//builder
-			//	.Entity<OrderStatusUpdate>()
-			//	.HasOne(e => e.Order)
-			//	.WithMany(e => e.OrderStatusUpdates)
-			//	.OnDelete(DeleteBehavior.Cascade);
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder
+                .Entity<OrderStatusUpdate>()
+                .HasOne(e => e.Order)
+                .WithMany(e => e.OrderStatusUpdates)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
-			//builder
-			//	.Entity<OrderItem>()
-			//	.HasOne(oi => oi.Coupon)
-			//	.WithMany(c => c.OrderItem)
-			//	.OnDelete(DeleteBehavior.SetNull);
-		}
+            //builder
+            //	.Entity<OrderItem>()
+            //	.HasOne(oi => oi.Coupon)
+            //	.WithMany(c => c.OrderItem)
+            //	.OnDelete(DeleteBehavior.SetNull);
+        }
 
-		public DbSet<Ingredient> Ingredients {set; get;}
+        public DbSet<Ingredient> Ingredients { set; get; }
 
         public DbSet<Product> Products { set; get; }
 
@@ -48,7 +50,7 @@ namespace DristorApp.Data.db
 
         public DbSet<Token> Tokens { set; get; }
 
-		public DbSet<Address> Addresses { set; get; }
+        public DbSet<Address> Addresses { set; get; }
 
         public DbSet<Order> Orders { set; get; }
 
@@ -70,3 +72,7 @@ namespace DristorApp.Data.db
 
 // Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore
 
+// Add-Migration MyFirstMigration
+// Add-Migration EditingUserMode
+// Update-Database
+// Update-Database -Connection $env:TodoAdminConn
