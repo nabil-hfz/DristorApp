@@ -565,7 +565,8 @@ namespace DristorApp.Migrations
                 {
                     b.HasOne("DristorApp.Data.Models.Coupon", "Coupon")
                         .WithOne("OrderItem")
-                        .HasForeignKey("DristorApp.Data.Models.OrderItem", "CouponId");
+                        .HasForeignKey("DristorApp.Data.Models.OrderItem", "CouponId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("DristorApp.Data.Models.Order", "Order")
                         .WithMany("OrderItems")

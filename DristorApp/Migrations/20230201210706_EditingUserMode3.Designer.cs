@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DristorApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230201164156_EditingUserMode")]
-    partial class EditingUserMode
+    [Migration("20230201210706_EditingUserMode3")]
+    partial class EditingUserMode3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -568,7 +568,8 @@ namespace DristorApp.Migrations
                 {
                     b.HasOne("DristorApp.Data.Models.Coupon", "Coupon")
                         .WithOne("OrderItem")
-                        .HasForeignKey("DristorApp.Data.Models.OrderItem", "CouponId");
+                        .HasForeignKey("DristorApp.Data.Models.OrderItem", "CouponId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("DristorApp.Data.Models.Order", "Order")
                         .WithMany("OrderItems")

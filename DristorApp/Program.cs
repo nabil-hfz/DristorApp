@@ -78,3 +78,5 @@ namespace DristorApp
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Launchup>(); });
     }
 }
+
+// http://localhost:4300/swagger/index.html
