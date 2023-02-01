@@ -33,9 +33,12 @@ namespace DristorApp
            
             });
 
-            //services.AddDbContext<AppDbContext>(
-            //    options =>
-            //    options.UseNpgsql(Configuration.GetConnectionString("DristorApp")));
+            services.AddDbContext<AppDbContext>(options =>
+                       options.UseNpgsql(
+                           Configuration.GetConnectionString("DristorDbConnection")
+                           )
+                       );
+
 
             services.AddScoped<IProductRepository, ImplProductRepository>();
             services.AddScoped<IUserRepository, ImplUserRepository>();
@@ -48,8 +51,18 @@ namespace DristorApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DristorApp v1"));
+            }
 
-            app.UseHttpsRedirection();
+
+            if (!env.IsDevelopment())
+            {
+                app.UseHttpsRedirection();
+            }
 
             app.UseCors(builder => builder
                 .AllowAnyMethod()

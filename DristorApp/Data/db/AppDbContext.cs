@@ -19,8 +19,6 @@ namespace DristorApp.Data.db
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=DristorApp;Username=DristorApp;Password=Admin@123456");
-
             optionsBuilder.EnableSensitiveDataLogging();
         }
 
@@ -28,18 +26,18 @@ namespace DristorApp.Data.db
         {
             base.OnModelCreating(builder);
 
+
             builder
-                .Entity<OrderStatusUpdate>()
-                .HasOne(e => e.Order)
-                .WithMany(e => e.OrderStatusUpdates)
-                .OnDelete(DeleteBehavior.Cascade);
+          .Entity<OrderStatusUpdate>()
+          .HasOne(e => e.Order)
+          .WithMany(e => e.OrderStatusUpdates)
+          .OnDelete(DeleteBehavior.Cascade);
 
-
-            //builder
-            //	.Entity<OrderItem>()
-            //	.HasOne(oi => oi.Coupon)
-            //	.WithMany(c => c.OrderItem)
-            //	.OnDelete(DeleteBehavior.SetNull);
+            builder
+                .Entity<OrderItem>()
+                .HasOne(oi => oi.Coupon)
+                .WithOne(c => c.OrderItem)
+                .OnDelete(DeleteBehavior.SetNull);
         }
 
         public DbSet<Ingredient> Ingredients { set; get; }
@@ -74,5 +72,6 @@ namespace DristorApp.Data.db
 
 // Add-Migration MyFirstMigration
 // Add-Migration EditingUserMode
+// Add-Migration EditingUserMode3
 // Update-Database
 // Update-Database -Connection $env:TodoAdminConn
