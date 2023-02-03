@@ -37,6 +37,11 @@
     <None Remove="Repositories\Roles\" />
     <None Remove="Repositories\ProductRepository\" />
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
+ 
+    <None Remove="Repositories\CouponRepository\" />
+    <None Remove="Repositories\CartItemRepository\" />
+ 
+ 
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
@@ -57,6 +62,11 @@
     <Folder Include="Repositories\UserRepository\" />
     <Folder Include="Repositories\Roles\" />
     <Folder Include="Repositories\ProductRepository\" />
+ 
+    <Folder Include="Repositories\CouponRepository\" />
+    <Folder Include="Repositories\CartItemRepository\" />
+ 
+ 
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.2" />

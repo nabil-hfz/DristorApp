@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DristorApp.Repositories.UserRepository
 {
-    public class ImplUserRepository : ImplRepository<User, int> , IUserRepository
+    public class ImplUserRepository : ImplRepository<User, int>, IUserRepository
     {
         public ImplUserRepository(AppDbContext dbContext) : base(dbContext)
         {
         }
 
-       
+
         public async Task<User> GetUserByEmailAsync(string email)
         {
             return await _DbContext.Users.FirstOrDefaultAsync(u => u.Email == email);

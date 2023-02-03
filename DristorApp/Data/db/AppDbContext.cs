@@ -4,7 +4,10 @@ using DristorApp.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+
+
 using static NuGet.Packaging.PackagingConstants;
+
 
 namespace DristorApp.Data.db
 {
@@ -74,5 +77,9 @@ namespace DristorApp.Data.db
 // Add-Migration EditingUserMode
 // Add-Migration EditingUserMode3
 // Add-Migration EditingUserMode4
+
+// Add-Migration testingDocker
+
+
 // Update-Database
 // Update-Database -Connection $env:TodoAdminConn

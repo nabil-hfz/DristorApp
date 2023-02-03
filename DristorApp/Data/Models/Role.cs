@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DristorApp.Data.Models
 {
-	public class Role : IdentityRole<int>
+    public class Role : IdentityRole<int>
     {
-		public ICollection<User> Users { set; get; }
-	}
+        public ICollection<User> Users { set; get; }
+    }
 }
 

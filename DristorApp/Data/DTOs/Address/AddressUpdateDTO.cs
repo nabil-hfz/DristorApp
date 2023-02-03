@@ -7,7 +7,11 @@ namespace DristorApp.Data.DTOs.Address
         public string Country { set; get; }
         public string City { set; get; }
         public string AddressLine { set; get; }
+
+        public string PostalCode { set; get; }
+
         public string postalCode { set; get; }
+
         public string PhoneNumber { set; get; }
 
         public int User { set; get; }
