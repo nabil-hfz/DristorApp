@@ -14,11 +14,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using DristorApp.Repositories.CartRepository;
+using DristorApp.Repositories.CouponRepository;
+using DristorApp.UserManagementService;
 
 namespace DristorApp
 {
-	public class Launchup
-	{
+    public class Launchup
+    {
         public IConfiguration Configuration { get; }
 
         public Launchup(IConfiguration configuration)
@@ -27,7 +30,8 @@ namespace DristorApp
         }
 
         // DI here
-        public void ConfigureServices(IServiceCollection services) {
+        public void ConfigureServices(IServiceCollection services)
+        {
             services.AddCors();
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
@@ -66,7 +70,7 @@ namespace DristorApp
                            )
                        );
 
- 
+
             //var sqlConnectionString = Configuration.GetConnectionString("DristorDbConnection");
             //services.AddDbContext<AppDbContext>(options =>
             //    options.UseNpgsql(
@@ -75,8 +79,8 @@ namespace DristorApp
             //    )
             //);
 
- 
- 
+
+
             services.AddIdentity<User, Role>()
                .AddEntityFrameworkStores<AppDbContext>()
                .AddDefaultTokenProviders();
@@ -104,9 +108,17 @@ namespace DristorApp
             services.AddScoped<IRepository<Token, string>, ImplRepository<Token, string>>();
             services.AddScoped<IRepository<Address, int>, ImplRepository<Address, int>>();
             services.AddScoped<IRoleRepository, ImplRoleRepository>();
-            
-                   System.Diagnostics.Debug.WriteLine("Launchup ConfigureServices ");
- }
+
+            services.AddScoped<IRepository<Ingredient, int>, ImplRepository<Ingredient, int>>();
+            services.AddScoped<IRepository<ProductVariant, int>, ImplRepository<ProductVariant, int>>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IRepository<OrderStatusUpdate, int>, ImplRepository<OrderStatusUpdate, int>>();
+            services.AddScoped<ICouponRepository, ImplCouponRepository>();
+            services.AddScoped<IUserManagementService, ImplUserManagementService>();
+            services.AddScoped<ICartItemRepository, CartItemRepository>();
+            services.AddScoped<IRepository<OrderItem, int>, ImplRepository<OrderItem, int>>();
+            System.Diagnostics.Debug.WriteLine("Launchup ConfigureServices ");
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -114,7 +126,7 @@ namespace DristorApp
             System.Diagnostics.Debug.WriteLine("Launchup env.IsDevelopment() " + env.IsDevelopment());
             if (env.IsDevelopment())
             {
-                
+
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DristorApp v1"));
@@ -139,8 +151,31 @@ namespace DristorApp
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-        }
+            CreateRoles(app.ApplicationServices);
 
+        }
+        private void CreateRoles(IServiceProvider serviceProvider)
+        {
+            using var scope = serviceProvider.CreateScope();
+            var roleManager = scope.ServiceProvider.GetService<RoleManager<Role>>();
+            if (roleManager is null)
+            {
+                throw new Exception("Role manager not configured.");
+            }
+
+            var roles = Configuration.GetSection("Identity:DefaultRoles").Get<List<string>>();
+
+            foreach (var role in roles)
+            {
+                if (roleManager.RoleExistsAsync(role).Result) continue;
+
+                var result = roleManager.CreateAsync(new Role { Name = role }).Result;
+                if (!result.Succeeded)
+                {
+                    throw new Exception(string.Join('\n', result.Errors));
+                }
+            }
+        }
     }
 }
 
