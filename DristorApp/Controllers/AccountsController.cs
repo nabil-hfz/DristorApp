@@ -78,7 +78,7 @@ namespace DristorApp.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Roles = user.Roles.Select(x => x.Name).ToList(),
-                Addresses = user.Addresses.Select(x => x.Id).ToList()
+                //Addresses = user.Addresses.Select(x => x.Id).ToList()
             };
         }
     }

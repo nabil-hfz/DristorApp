@@ -28,7 +28,7 @@ namespace DristorApp.Controllers
             return await _addressRepository.GetAllAsync();
         }
 
-        // GET: api/Addresses/5
+        // GET: api/Addresses/3
         [HttpGet("{id}")]
         public async Task<ActionResult<Address>> GetAddress(int id)
         {
@@ -45,12 +45,12 @@ namespace DristorApp.Controllers
 
         // POST: api/Addresses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
         /*public async Task<ActionResult<Address>> PostAddress(Address address)
         {
             await _addressRepository.CreateAsync(address);
             return CreatedAtAction("GetAddress", new { id = address.Id }, address);
         }*/
+        [HttpPost]
         public async Task<ActionResult<Address>> PostAddress(AddressCreateDTO dto)
         {
             var user = await _userRepository.GetByIdAsync(dto.User);
@@ -62,19 +62,23 @@ namespace DristorApp.Controllers
             var address = new Address
             {
                 Id = dto.Id,
-                Country = dto.Country,
+                User = user
+,Country = dto.Country,
                 City = dto.City,
                 AddressLine = dto.AddressLine,
                 PostalCode = dto.PostalCode,
                 PhoneNumber = dto.PhoneNumber,
-                User = user
             };
+            System.Diagnostics.Debug.WriteLine("PostAddress User " + dto.User);
+            System.Diagnostics.Debug.WriteLine("PostAddress user " + user);
+            System.Diagnostics.Debug.WriteLine("PostAddress address " + address.User);
+
             await _addressRepository.CreateAsync(address);
 
             return CreatedAtAction("GetAddress", new { id = address.Id }, address);
         }
 
-        // DELETE: api/Addresses/5
+        // DELETE: api/Addresses/3
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAddress(int id)
         {
