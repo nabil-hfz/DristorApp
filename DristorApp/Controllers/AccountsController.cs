@@ -47,6 +47,7 @@ namespace DristorApp.Controllers
             }
             return BadRequest(result.Errors.ToList());
         }
+
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginUserDTO dto)

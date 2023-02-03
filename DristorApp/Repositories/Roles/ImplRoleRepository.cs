@@ -21,7 +21,12 @@ namespace DristorApp.Repositories.Roles
 
         public async Task<Role?> GetRoleByNameAsync(string name)
         {
-            return await _DbContext.Roles.FirstOrDefaultAsync(role => role.Name == name);
+            System.Diagnostics.Debug.WriteLine("ImplRoleRepository GetRoleByNameAsync name " + name);
+
+            var result =  await _DbContext.Roles.FirstOrDefaultAsync(role => role.Name == name);
+            System.Diagnostics.Debug.WriteLine("ImplRoleRepository GetRoleByNameAsync result " + result);
+
+            return result;
         }
     }
 }

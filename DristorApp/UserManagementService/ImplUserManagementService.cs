@@ -37,10 +37,13 @@ namespace DristorApp.UserManagementService
         public async Task<IdentityResult> RegisterUserAsync(RegisterUserDTO dto)
         {
             var customerRole = await _roleRepository.GetRoleByNameAsync("Customer");
+
             if (customerRole is null)
             {
                 throw new Exception("Customer role not found.");
             }
+
+            System.Diagnostics.Debug.WriteLine("RegisterUserAsync customerRole " + customerRole.ToString());
 
             var user = new User
             {
@@ -50,6 +53,7 @@ namespace DristorApp.UserManagementService
                 LastName = dto.LastName,
                 Roles = new List<Role> { customerRole }
             };
+            System.Diagnostics.Debug.WriteLine("RegisterUserAsync new User " + user.ToString());
 
             return await _userManager.CreateAsync(user, dto.Password);
         }
