@@ -1,46 +1,66 @@
 ﻿<Properties StartupConfiguration="{193AAE1D-F823-4C79-B325-4AB4EBA0DC37}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="DristorApp/Controllers/AddressesController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DristorApp/Repositories/UserRepository/IUserRepository.cs">
     <Files>
-      <File FileName="DristorApp/Data/DTOs/Address/AddressCreateDTO.cs" Line="3" Column="2" />
-      <File FileName="DristorApp/Migrations/20230201164137_InitialEntities.cs" Line="116" Column="20" />
-      <File FileName="DristorApp/Migrations/20230201164137_InitialEntities.Designer.cs" Line="52" Column="40" />
-      <File FileName="DristorApp/Migrations/20230201210706_EditingUserMode3.Designer.cs" Line="52" Column="40" />
-      <File FileName="DristorApp/Migrations/AppDbContextModelSnapshot.cs" Line="49" Column="40" />
-      <File FileName="DristorApp/Data/DTOs/Address/AddressUpdateDTO.cs" Line="10" Column="22" />
-      <File FileName="DristorApp/Data/Models/Address.cs" Line="12" Column="22" />
-      <File FileName="DristorApp/Controllers/ProductsController.cs" Line="49" Column="28" />
-      <File FileName="DristorApp/Data/DTOs/Porduct/ProductUpdateDTO.cs" Line="4" Column="18" />
-      <File FileName="DristorApp/Repositories/BaseRepository/IRepository.cs" Line="4" Column="19" />
-      <File FileName="DristorApp/Controllers/ProductVariantsController.cs" Line="19" Column="13" />
-      <File FileName="DristorApp/Controllers/CouponsController.cs" Line="13" Column="43" />
-      <File FileName="DristorApp/Data/DTOs/Coupon/CouponUpdateDTO.cs" Line="5" Column="3" />
-      <File FileName="DristorApp/Data/DTOs/Coupon/CouponCreateDTO.cs" Line="1" Column="1" />
-      <File FileName="DristorApp/Repositories/CouponRepository/ICouponRepository.cs" Line="10" Column="6" />
-      <File FileName="DristorApp/Repositories/CouponRepository/ImplCouponRepository.cs" Line="15" Column="31" />
-      <File FileName="DristorApp/Repositories/CartItemRepository/ICartRepository.cs" Line="7" Column="37" />
-      <File FileName="DristorApp/Repositories/CartItemRepository/ImplCartRepository.cs" Line="39" Column="26" />
-      <File FileName="DristorApp/Repositories/Roles/ImplRoleRepository.cs" Line="1" Column="1" />
-      <File FileName="DristorApp/Repositories/UserRepository/ImplUserRepository.cs" Line="1" Column="1" />
-      <File FileName="DristorApp/Repositories/ProductRepository/ImplProductRepository.cs" Line="1" Column="1" />
-      <File FileName="DristorApp/Repositories/OrderRepository/ImplOrderRepository.cs" Line="42" Column="2" />
-      <File FileName="DristorApp/Repositories/OrderRepository/IOrderRepository.cs" Line="11" Column="2" />
-      <File FileName="DristorApp/Controllers/IngredientsController.cs" Line="8" Column="68" />
-      <File FileName="DristorApp/Controllers/OrderItemsController.cs" Line="48" Column="76" />
-      <File FileName="DristorApp/Data/DTOs/Orderitem/OrderItemUpdateDTO.cs" Line="8" Column="42" />
-      <File FileName="DristorApp/Data/DTOs/Orderitem/OrderItemCreateDTO.cs" Line="7" Column="33" />
-      <File FileName="DristorApp/Controllers/OrderStatusUpdatesController.cs" Line="82" Column="2" />
-      <File FileName="DristorApp/Controllers/OrdersController.cs" Line="104" Column="1" />
-      <File FileName="DristorApp/Data/DTOs/CartItem/CartItemCreateDTO.cs" Line="8" Column="1" />
-      <File FileName="DristorApp/Data/DTOs/CartItem/CartItemUpdateDTO.cs" Line="1" Column="1" />
-      <File FileName="DristorApp/Controllers/AddressesController.cs" Line="70" Column="1" />
+      <File FileName="DristorApp/Data/DTOs/Address/AddressCreateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/Address/AddressUpdateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/CartItem/CartItemCreateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/CartItem/CartItemUpdateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/Coupon/CouponCreateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/Coupon/CouponUpdateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/Order/OrderCreateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/Order/OrderUpdateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/Orderitem/OrderItemCreateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/Orderitem/OrderItemUpdateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/Porduct/ProductCreateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/Porduct/ProductUpdateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/ProductVariant/ProductVariantCreateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/ProductVariant/ProductVariantUpdateDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/User/LoginUserDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/User/RegisterUserDTO.cs" />
+      <File FileName="DristorApp/Data/DTOs/User/UserDTO.cs" />
+      <File FileName="DristorApp/Data/Models/Address.cs" />
+      <File FileName="DristorApp/Data/Models/CartItem.cs" />
+      <File FileName="DristorApp/Data/Models/Coupon.cs" />
+      <File FileName="DristorApp/Data/Models/ErrorViewModel.cs" />
+      <File FileName="DristorApp/Data/Models/Ingredient.cs" />
+      <File FileName="DristorApp/Data/Models/Order.cs" />
+      <File FileName="DristorApp/Data/Models/OrderItem.cs" />
+      <File FileName="DristorApp/Data/Models/OrderStatusUpdate.cs" />
+      <File FileName="DristorApp/Data/Models/Product.cs" />
+      <File FileName="DristorApp/Data/Models/ProductVariant.cs" />
+      <File FileName="DristorApp/Data/Models/Role.cs" />
+      <File FileName="DristorApp/Data/Models/Token.cs" />
+      <File FileName="DristorApp/Data/Models/User.cs" />
+      <File FileName="DristorApp/Repositories/BaseRepository/ImplRepository.cs" />
+      <File FileName="DristorApp/Repositories/BaseRepository/IRepository.cs" />
+      <File FileName="DristorApp/Repositories/CartItemRepository/ICartRepository.cs" />
+      <File FileName="DristorApp/Repositories/CartItemRepository/ImplCartRepository.cs" />
+      <File FileName="DristorApp/Repositories/CouponRepository/ICouponRepository.cs" />
+      <File FileName="DristorApp/Repositories/CouponRepository/ImplCouponRepository.cs" />
+      <File FileName="DristorApp/Repositories/OrderRepository/ImplOrderRepository.cs" />
+      <File FileName="DristorApp/Repositories/OrderRepository/IOrderRepository.cs" />
+      <File FileName="DristorApp/Repositories/ProductRepository/ImplProductRepository.cs" />
+      <File FileName="DristorApp/Repositories/ProductRepository/IProductRepository.cs" />
+      <File FileName="DristorApp/Repositories/Roles/ImplRoleRepository.cs" />
+      <File FileName="DristorApp/Repositories/Roles/IRoleRepository.cs" />
+      <File FileName="DristorApp/Repositories/UserRepository/ImplUserRepository.cs" />
+      <File FileName="DristorApp/Repositories/UserRepository/IUserRepository.cs" Line="10" Column="48" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="DristorApp" expanded="True">
             <Node name="DristorApp" expanded="True">
-              <Node name="Views" expanded="True" />
-              <Node name="wwwroot" expanded="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True">
+                <Node name="db" expanded="True" />
+                <Node name="DTOs" expanded="True">
+                  <Node name="Address" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Repositories" expanded="True">
+                <Node name="UserRepository" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
