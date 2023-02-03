@@ -80,3 +80,4 @@ namespace DristorApp
 }
 
 // http://localhost:4300/swagger/index.html
+// Server=localhost;Username=postgres;Database=postgres
