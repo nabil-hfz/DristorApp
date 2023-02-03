@@ -4,8 +4,11 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+ 
     <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
     <UserSecretsId>442c1795-05c1-4257-a68f-717f7ea79fd0</UserSecretsId>
+ 
+ 
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,8 +41,11 @@
     <None Remove="Repositories\Roles\" />
     <None Remove="Repositories\ProductRepository\" />
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
+ 
     <None Remove="Repositories\CouponRepository\" />
     <None Remove="Repositories\CartItemRepository\" />
+ 
+ 
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
@@ -60,8 +66,11 @@
     <Folder Include="Repositories\UserRepository\" />
     <Folder Include="Repositories\Roles\" />
     <Folder Include="Repositories\ProductRepository\" />
+ 
     <Folder Include="Repositories\CouponRepository\" />
     <Folder Include="Repositories\CartItemRepository\" />
+ 
+ 
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.2" />

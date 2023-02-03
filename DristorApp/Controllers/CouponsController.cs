@@ -1,6 +1,7 @@
 ﻿using System;
 using DristorApp.Data.DTOs.Coupon;
 using DristorApp.Data.Models;
+using DristorApp.Repositories.CouponRepository;
 using DristorApp.Repositories.UserRepository;
 using Microsoft.AspNetCore.Mvc;
 

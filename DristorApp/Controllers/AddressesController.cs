@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Reflection.Emit;
 using DristorApp.Data.DTOs.Address;
 using DristorApp.Data.Models;
 using DristorApp.Repositories.BaseRepository;
 using DristorApp.Repositories.UserRepository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DristorApp.Controllers
 {
@@ -67,8 +69,6 @@ namespace DristorApp.Controllers
                 PhoneNumber = dto.PhoneNumber,
                 User = user
             };
-
-
             await _addressRepository.CreateAsync(address);
 
             return CreatedAtAction("GetAddress", new { id = address.Id }, address);

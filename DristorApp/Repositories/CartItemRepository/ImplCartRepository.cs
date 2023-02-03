@@ -7,42 +7,42 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DristorApp.Repositories.CartRepository
 {
-  
-public class CartItemRepository : ImplRepository<CartItem, int>, ICartItemRepository
-{
-    public CartItemRepository(AppDbContext dbContext) : base(dbContext)
-    {
-    }
 
-    public override Task<List<CartItem>> GetAllAsync()
+    public class CartItemRepository : ImplRepository<CartItem, int>, ICartItemRepository
     {
-        return _DbContext.CartItems
-            .Include(x => x.User)
-            .Include(x => x.ProductVariant)
-            .ThenInclude(x => x.Product)
-            .ThenInclude(x => x.Ingredients)
-            .ToListAsync();
-    }
+        public CartItemRepository(AppDbContext dbContext) : base(dbContext)
+        {
+        }
 
-    public override Task<CartItem?> GetByIdAsync(int id)
-    {
-        return _DbContext.CartItems
-            .Include(x => x.User)
-            .Include(x => x.ProductVariant)
-            .ThenInclude(x => x.Product)
-            .ThenInclude(x => x.Ingredients)
-            .FirstOrDefaultAsync(x => x.Id == id);
-    }
+        public override Task<List<CartItem>> GetAllAsync()
+        {
+            return _DbContext.CartItems
+                .Include(x => x.User)
+                .Include(x => x.ProductVariant)
+                .ThenInclude(x => x.Product)
+                .ThenInclude(x => x.Ingredients)
+                .ToListAsync();
+        }
 
-    public Task<List<CartItem>> GetByUserId(int userId)
-    {
-        return _DbContext.CartItems
-            .Include(x => x.User)
-            .Include(x => x.ProductVariant)
-            .ThenInclude(x => x.Product)
-            .ThenInclude(x => x.Ingredients)
-            .Where(x => x.User.Id == userId)
-            .ToListAsync();
+        public override Task<CartItem?> GetByIdAsync(int id)
+        {
+            return _DbContext.CartItems
+                .Include(x => x.User)
+                .Include(x => x.ProductVariant)
+                .ThenInclude(x => x.Product)
+                .ThenInclude(x => x.Ingredients)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public Task<List<CartItem>> GetByUserId(int userId)
+        {
+            return _DbContext.CartItems
+                .Include(x => x.User)
+                .Include(x => x.ProductVariant)
+                .ThenInclude(x => x.Product)
+                .ThenInclude(x => x.Ingredients)
+                .Where(x => x.User.Id == userId)
+                .ToListAsync();
+        }
     }
-}
 }

@@ -66,6 +66,7 @@ namespace DristorApp
                            )
                        );
 
+ 
             //var sqlConnectionString = Configuration.GetConnectionString("DristorDbConnection");
             //services.AddDbContext<AppDbContext>(options =>
             //    options.UseNpgsql(
@@ -74,6 +75,8 @@ namespace DristorApp
             //    )
             //);
 
+ 
+ 
             services.AddIdentity<User, Role>()
                .AddEntityFrameworkStores<AppDbContext>()
                .AddDefaultTokenProviders();

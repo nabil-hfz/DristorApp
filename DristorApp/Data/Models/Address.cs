@@ -13,9 +13,9 @@ namespace DristorApp.Data.Models
         public string PhoneNumber { set; get; }
 
         [Required]
-        public User   User { set; get; }
+        public User User { set; get; }
 
-        public ICollection<Order> Orders{ set; get; }
+        public ICollection<Order> Orders { set; get; }
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+
 using DristorApp.Data.Models;
 using DristorApp.Repositories.BaseRepository;
 
@@ -8,5 +9,16 @@ namespace DristorApp.Repositories.OrderRepository
     {
 
     }
-}
 
+    namespace DristorApp.Repositories.OrderRepository
+    {
+        public class IOrderRepository
+        {
+            public IOrderRepository()
+            {
+            }
+        }
+
+    }
+
+}
