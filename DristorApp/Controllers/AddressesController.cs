@@ -36,7 +36,7 @@ namespace DristorApp.Controllers
 
             if (address == null)
             {
-                return NotFound();
+                return NotFound("Address not found id: "+id);
             }
 
             return address;
@@ -56,7 +56,7 @@ namespace DristorApp.Controllers
             var user = await _userRepository.GetByIdAsync(dto.User);
             if (user is null)
             {
-                return NotFound();
+                return NotFound("User not found User: "+ dto.User);
             }
 
             var address = new Address
@@ -81,7 +81,7 @@ namespace DristorApp.Controllers
             var address = await _addressRepository.GetByIdAsync(id);
             if (address == null)
             {
-                return NotFound();
+                return NotFound("Address not found id: "+ id);
             }
 
             await _addressRepository.DeleteAsync(address);

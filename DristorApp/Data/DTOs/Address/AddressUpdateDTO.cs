@@ -10,8 +10,6 @@ namespace DristorApp.Data.DTOs.Address
 
         public string PostalCode { set; get; }
 
-        public string postalCode { set; get; }
-
         public string PhoneNumber { set; get; }
 
         public int User { set; get; }
