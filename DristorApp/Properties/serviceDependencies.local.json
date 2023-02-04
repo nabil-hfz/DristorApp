@@ -6,7 +6,7 @@
       "containerName": "postgresql",
       "containerImage": "postgres",
       "type": "postgresql.container",
-      "connectionId": "DristorApp",
+      "connectionId": "postgres",
       "dynamicId": null
     }
   }

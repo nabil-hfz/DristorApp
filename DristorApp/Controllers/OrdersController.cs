@@ -75,7 +75,7 @@ namespace DristorApp.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(OrderCreateDTO dto)
+        public async Task<ActionResult<Order>> PostOrder(OrderStatusUpdateCreateDTO dto)
         {
             var address = await _addressRepository.GetByIdAsync(dto.Address);
             if (address is null)

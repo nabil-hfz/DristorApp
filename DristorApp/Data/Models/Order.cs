@@ -7,9 +7,9 @@ namespace DristorApp.Data.Models
     {
         public int Id { set; get; }
         [Required]
-        public Address Address { set; get; }
-        public ICollection<OrderStatusUpdate> OrderStatusUpdates { set; get; }
-        public ICollection<OrderItem> OrderItems { set; get; }
+        public virtual Address Address { set; get; }
+        public virtual ICollection<OrderStatusUpdate> OrderStatusUpdates { set; get; }
+        public virtual ICollection<OrderItem> OrderItems { set; get; }
 
     }
 }

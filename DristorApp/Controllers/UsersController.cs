@@ -11,38 +11,31 @@ namespace DristorApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
-    public class UsersController : Controller
+    public class UsersController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IRoleRepository _roleRepository;
+        private readonly IUserRepository _usersRepository;
+        private readonly IRoleRepository _rolesRepository;
         private readonly IRepository<Address, int> _addressRepository;
 
-        public UsersController(
-            IUserRepository userRepository,
-            IRoleRepository roleRepository,
-            IRepository<Address, int> addressRepository
-            )
+        public UsersController(IUserRepository usersRepository, IRoleRepository rolesRepository, IRepository<Address, int> addressRepository)
         {
-            this._userRepository = userRepository;
-            this._roleRepository = roleRepository;
-            this._addressRepository = addressRepository;
+            _usersRepository = usersRepository;
+            _rolesRepository = rolesRepository;
+            _addressRepository = addressRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
         {
-            var result = await _userRepository.GetAllAsync();
-            var users = result.Select(user => new UserDTO()
+            var users = (await _usersRepository.GetAllAsync()).Select(user => new UserDTO()
             {
                 Id = user.Id,
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Roles = user.Roles.Select(role => role.Name).ToList(),
-                Addresses = user.Addresses.Select(address => address.Id).ToList(),
-
-            }); ;
+                Roles = user.Roles is not null ? user.Roles.Select(x => x.Name).ToList():null,
+                Addresses = user.Roles is not null ?  user.Addresses.Select(x => x.Id).ToList() : null
+            });
 
             return Ok(users);
         }
@@ -50,118 +43,103 @@ namespace DristorApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetUser(int id)
         {
-            var result = await _userRepository.GetByIdAsync(id);
-            if (result is null)
+            var user = await _usersRepository.GetUserByIdAndRolesAsync(id);
+            if (user is null)
             {
                 return NotFound();
             }
 
-
-            var users = new UserDTO()
+            return new UserDTO
             {
-                Id = result.Id,
-                Email = result.Email,
-                FirstName = result.FirstName,
-                LastName = result.LastName,
-                Roles = result.Roles.Select(role => role.Name).ToList(),
-                Addresses = result.Addresses.Select(address => address.Id).ToList(),
-            }; ;
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Roles = user.Roles.Select(x => x.Name).ToList(),
+                Addresses = user.Addresses.Select(x => x.Id).ToList()
+            };
+        }
 
-            return Ok(users);
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUser(int id, UserDTO user)
+        {
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+
+            var realUser = await _usersRepository.GetUserByIdAndRolesAsync(id);
+            if (realUser is null)
+            {
+                return NotFound();
+            }
+
+            realUser.FirstName = user.FirstName;
+            realUser.LastName = user.LastName;
+            realUser.Email = user.Email;
+            realUser.Roles.Clear();
+            realUser.Addresses.Clear();
+
+            foreach (var roleName in user.Roles)
+            {
+                var role = await _rolesRepository.GetRoleByNameAsync(roleName);
+                if (role is null)
+                {
+                    return NotFound();
+                }
+                realUser.Roles.Add(role);
+            }
+
+            foreach (var addressId in user.Addresses)
+            {
+                var address = await _addressRepository.GetByIdAsync(addressId);
+                if (address is null)
+                {
+                    return NotFound();
+                }
+                realUser.Addresses.Add(address);
+            }
+
+            await _usersRepository.UpdateAsync(realUser);
+
+            return NoContent();
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> AddUser([FromBody] UserDTO userDTO)
+        public async Task<ActionResult<User>> PostUser([FromBody] UserDTO dto)
         {
-            var roles = (await _roleRepository.GetAllAsync())
-                .Where(role => userDTO.Roles.Contains(role.Name)).
-                ToList();
-
-            var adresses = (await _addressRepository.GetAllAsync())
-                .Where(address => userDTO.Addresses.Contains(address.Id))
+            var roles = (await _rolesRepository.GetAllAsync())
+                .Where(role => dto.Roles.Contains(role.Name))
+                .ToList();
+            var addresses = (await _addressRepository.GetAllAsync())
+                .Where(address => dto.Addresses.Contains(address.Id))
                 .ToList();
 
             var user = new User
             {
-
-                Email = userDTO.Email,
-                FirstName = userDTO.FirstName,
-                LastName = userDTO.LastName,
-                Addresses = adresses,
-                Roles = roles,
+                Email = dto.Email,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Addresses = addresses,
+                Roles = roles
             };
-            await _userRepository.CreateAsync(user);
-            return CreatedAtAction("AddUser", user);
+            await _usersRepository.CreateAsync(user);
 
-        }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<User>> UpdateUser(int id, UserDTO userDTO)
-        {
-
-            if (id != userDTO.Id)
-            {
-
-                return BadRequest();
-            }
-
-            var currentUser = await _userRepository.GetByIdAsync(id);
-            if (currentUser is null)
-            {
-                return NotFound("User not found");
-            }
-
-            currentUser.FirstName = userDTO.FirstName;
-            currentUser.LastName = userDTO.LastName;
-            currentUser.Email = userDTO.Email;
-            currentUser.Roles.Clear();
-            currentUser.Addresses.Clear();
-
-            foreach (var roleName in userDTO.Roles)
-            {
-
-                var role = await _roleRepository.GetRoleByNameAsync(roleName);
-                if (role is null)
-                {
-                    return NotFound("Role " + roleName + " not found");
-
-                }
-                currentUser.Roles.Add(role);
-
-            }
-
-            foreach (var addressId in userDTO.Addresses)
-            {
-
-                var address = await _addressRepository.GetByIdAsync(addressId);
-                if (address is null)
-                {
-                    return NotFound("Address " + address + " not found");
-
-                }
-                currentUser.Addresses.Add(address);
-
-            }
-
-            await _userRepository.UpdateAsync(currentUser);
-            return CreatedAtAction("UpdateUser", currentUser);
-
+            return CreatedAtAction("GetUser", user);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await _userRepository.GetByIdAsync(id);
-            if (user is null)
+            var user = await _usersRepository.GetUserByIdAndRolesAsync(id);
+            if (user == null)
             {
                 return NotFound();
-
             }
-            await _userRepository.DeleteAsync(user);
+
+            await _usersRepository.DeleteAsync(user);
 
             return NoContent();
         }
-
     }
 }
-

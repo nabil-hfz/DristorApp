@@ -1,14 +1,15 @@
 ﻿using System;
-namespace DristorApp.Data.Models
+namespace DristorApp.Data.DTOs.OrderStatusUpdate
+
 {
-    public class OrderStatusUpdate
+    public class OrderStatusUpdateUpdateDTO
     {
         public int Id { set; get; }
         public string Status { set; get; }
         public DateTime TimesTamp { set; get; }
 
         public int OrderId { set; get; }
-        public virtual Order Order { set; get; }
     }
 }
+
 

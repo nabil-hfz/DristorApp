@@ -19,7 +19,7 @@ namespace DristorApp.Repositories.BaseRepository
         }
         public virtual async Task<List<Entity>> GetAllAsync()
         {
-            return await _DbContext.Set<Entity>().AsNoTracking().ToListAsync();
+            return await _DbContext.Set<Entity>().ToListAsync();
         }
 
 
@@ -35,13 +35,13 @@ namespace DristorApp.Repositories.BaseRepository
         }
         public virtual async Task UpdateAsync(Entity entity)
         {
-            _DbContext.Set<Entity>().Remove(entity);
+            _DbContext.Set<Entity>().Update(entity);
             await _DbContext.SaveChangesAsync();
         }
 
         public virtual async Task DeleteAsync(Entity entity)
         {
-            _DbContext.Set<Entity>().Update(entity);
+            _DbContext.Set<Entity>().Remove(entity);
             await _DbContext.SaveChangesAsync();
         }
     }

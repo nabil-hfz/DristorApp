@@ -1,6 +1,8 @@
 ﻿using System;
+using DristorApp.Data.DTOs.OrderStatusUpdate;
 using DristorApp.Data.Models;
 using DristorApp.Repositories.BaseRepository;
+using DristorApp.Repositories.OrderRepository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DristorApp.Controllers
@@ -10,10 +12,12 @@ namespace DristorApp.Controllers
     public class OrderStatusUpdatesController : ControllerBase
     {
         private readonly IRepository<OrderStatusUpdate, int> _orderStatusUpdateRepository;
+        private readonly IOrderRepository _orderRepository;
 
-        public OrderStatusUpdatesController(IRepository<OrderStatusUpdate, int> orderStatusUpdateRepository)
+        public OrderStatusUpdatesController(IRepository<OrderStatusUpdate, int> orderStatusUpdateRepository , IOrderRepository orderRepository)
         {
             _orderStatusUpdateRepository = orderStatusUpdateRepository;
+            _orderRepository = orderRepository;
         }
 
         // GET: api/OrderStatusUpdates
@@ -34,20 +38,43 @@ namespace DristorApp.Controllers
                 return NotFound();
             }
 
+            var order = await _orderRepository.GetByIdAsync(orderStatusUpdate.OrderId);
+
+            if (order == null)
+            {
+                return NotFound("Order not found");
+            }
+            orderStatusUpdate.Order = order;
+
             return orderStatusUpdate;
         }
 
         // PUT: api/OrderStatusUpdates/3
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrderStatusUpdate(int id, OrderStatusUpdate orderStatusUpdate)
+        public async Task<IActionResult> PutOrderStatusUpdate(int id, OrderStatusUpdateUpdateDTO orderStatusUpdateUDTO)
         {
-            if (id != orderStatusUpdate.Id)
+            if (id != orderStatusUpdateUDTO.Id)
             {
                 return BadRequest();
             }
 
-            await _orderStatusUpdateRepository.UpdateAsync(orderStatusUpdate);
+            var order = await _orderRepository.GetByIdAsync(orderStatusUpdateUDTO.OrderId);
+
+            if (order == null)
+            {
+                return NotFound("Order not found");
+            }
+
+            var osu = new OrderStatusUpdate
+            {
+                TimesTamp = orderStatusUpdateUDTO.TimesTamp,
+                Status = orderStatusUpdateUDTO.Status,
+                OrderId = order.Id,
+                Order = order
+            };
+
+            await _orderStatusUpdateRepository.UpdateAsync(osu);
 
             return NoContent();
         }
@@ -55,11 +82,26 @@ namespace DristorApp.Controllers
         // POST: api/OrderStatusUpdates
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<OrderStatusUpdate>> PostOrderStatusUpdate(OrderStatusUpdate orderStatusUpdate)
+        public async Task<ActionResult<OrderStatusUpdate>> PostOrderStatusUpdate(OrderStatusUpdateCreateDTO orderStatusUpdateDTO)
         {
-            await _orderStatusUpdateRepository.CreateAsync(orderStatusUpdate);
 
-            return CreatedAtAction("GetOrderStatusUpdate", new { id = orderStatusUpdate.Id }, orderStatusUpdate);
+            var order = await _orderRepository.GetByIdAsync(orderStatusUpdateDTO.OrderId);
+
+            if (order == null)
+            {
+                return NotFound("Order not found");
+            }
+
+            var osu = new OrderStatusUpdate
+            {
+                TimesTamp = orderStatusUpdateDTO.TimesTamp,
+                Status = orderStatusUpdateDTO.Status,
+                OrderId = order.Id,
+                Order = order
+            };
+            await _orderStatusUpdateRepository.CreateAsync(osu);
+
+            return CreatedAtAction("GetOrderStatusUpdate", new { id = osu.Id }, osu);
         }
 
         // DELETE: api/OrderStatusUpdates/3

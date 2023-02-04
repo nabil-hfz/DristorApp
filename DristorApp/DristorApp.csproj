@@ -45,9 +45,8 @@
     <None Remove="UserManagementService\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
+    <Folder Include="Data\DTOs\NewFolder\" />
     <Folder Include="Data\Models\" />
-    <Folder Include="Data\DTOs\" />
     <Folder Include="Data\DTOs\Address\" />
     <Folder Include="Data\DTOs\CartItem\" />
     <Folder Include="Data\DTOs\Coupon\" />
@@ -56,12 +55,11 @@
     <Folder Include="Data\DTOs\Porduct\" />
     <Folder Include="Data\DTOs\ProductVariant\" />
     <Folder Include="Data\DTOs\User\" />
-    <Folder Include="Repositories\" />
     <Folder Include="Repositories\OrderRepository\" />
     <Folder Include="Repositories\BaseRepository\" />
     <Folder Include="Data\db\" />
     <Folder Include="Repositories\UserRepository\" />
-    <Folder Include="Repositories\Roles\" />
+    <Folder Include="Repositories\RolesRepository\" />
     <Folder Include="Repositories\ProductRepository\" />
  
     <Folder Include="Repositories\CouponRepository\" />

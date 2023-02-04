@@ -77,6 +77,34 @@ namespace DristorApp.Controllers
 
             return CreatedAtAction("GetAddress", new { id = address.Id }, address);
         }
+        // PUT: api/Addresses/3
+         [HttpPut("{id}")]
+        public async Task<IActionResult> PutAddress(int id, AddressUpdateDTO dto)
+        {
+            var address = await _addressRepository.GetByIdAsync(id);
+            if (address is null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userRepository.GetByIdAsync(dto.User);
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            address.Id = dto.Id;
+            address.Country = dto.Country;
+            address.City = dto.City;
+            address.AddressLine = dto.AddressLine;
+            address.PostalCode = dto.PostalCode;
+            address.PhoneNumber = dto.PhoneNumber;
+            address.User = user;
+
+            await _addressRepository.UpdateAsync(address);
+
+            return Ok(address);
+        }
 
         // DELETE: api/Addresses/3
         [HttpDelete("{id}")]

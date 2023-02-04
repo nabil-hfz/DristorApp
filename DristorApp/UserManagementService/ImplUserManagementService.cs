@@ -37,6 +37,7 @@ namespace DristorApp.UserManagementService
         public async Task<IdentityResult> RegisterUserAsync(RegisterUserDTO dto)
         {
             var customerRole = await _roleRepository.GetRoleByNameAsync("Customer");
+
             if (customerRole is null)
             {
                 throw new Exception("Customer role not found.");

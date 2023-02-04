@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Claims;
+using System.Xml.Linq;
 using DristorApp.Data.DTOs.User;
 using DristorApp.Data.Models;
 using DristorApp.Repositories.UserRepository;
@@ -47,6 +48,7 @@ namespace DristorApp.Controllers
             }
             return BadRequest(result.Errors.ToList());
         }
+
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginUserDTO dto)
@@ -65,11 +67,12 @@ namespace DristorApp.Controllers
         public async Task<ActionResult<UserDTO>> GetCurrentUser()
         {
             var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = await _userRepository.GetByIdAsync(int.Parse(id));
+            var user = await _userRepository.GetUserByIdAndRolesAsync(int.Parse(id));
             if (user is null)
             {
                 return NotFound();
             }
+            
 
             return new UserDTO
             {
@@ -78,7 +81,7 @@ namespace DristorApp.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Roles = user.Roles.Select(x => x.Name).ToList(),
-                //Addresses = user.Addresses.Select(x => x.Id).ToList()
+                Addresses = user.Addresses.Select(x => x.Id).ToList()
             };
         }
     }

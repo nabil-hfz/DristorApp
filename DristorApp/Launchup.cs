@@ -17,6 +17,7 @@ using System.Text;
 using DristorApp.Repositories.CartRepository;
 using DristorApp.Repositories.CouponRepository;
 using DristorApp.UserManagementService;
+using System.Collections.Generic;
 
 namespace DristorApp
 {
@@ -111,11 +112,11 @@ namespace DristorApp
 
             services.AddScoped<IRepository<Ingredient, int>, ImplRepository<Ingredient, int>>();
             services.AddScoped<IRepository<ProductVariant, int>, ImplRepository<ProductVariant, int>>();
-            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderRepository, ImplOrderRepository>();
             services.AddScoped<IRepository<OrderStatusUpdate, int>, ImplRepository<OrderStatusUpdate, int>>();
             services.AddScoped<ICouponRepository, ImplCouponRepository>();
             services.AddScoped<IUserManagementService, ImplUserManagementService>();
-            services.AddScoped<ICartItemRepository, CartItemRepository>();
+            services.AddScoped<ICartItemRepository, ImplCartItemRepository>();
             services.AddScoped<IRepository<OrderItem, int>, ImplRepository<OrderItem, int>>();
             System.Diagnostics.Debug.WriteLine("Launchup ConfigureServices ");
         }
@@ -158,18 +159,26 @@ namespace DristorApp
         {
             using var scope = serviceProvider.CreateScope();
             var roleManager = scope.ServiceProvider.GetService<RoleManager<Role>>();
+            System.Diagnostics.Debug.WriteLine("CreateRoles roleManager " + (roleManager is null));
             if (roleManager is null)
             {
                 throw new Exception("Role manager not configured.");
             }
 
             var roles = Configuration.GetSection("Identity:DefaultRoles").Get<List<string>>();
+            System.Diagnostics.Debug.WriteLine("start CreateRoles roles " + roles);
+            roles.ForEach(element => System.Diagnostics.Debug.WriteLine("current CreateRoles element " + element));
+            //roles.ForEach(Console.WriteLine);
+            System.Diagnostics.Debug.WriteLine("end CreateRoles roles " + roles);
 
             foreach (var role in roles)
             {
-                if (roleManager.RoleExistsAsync(role).Result) continue;
+                var isRoleExisted = roleManager.RoleExistsAsync(role).Result;
+                System.Diagnostics.Debug.WriteLine("CreateRoles isRoleExisted " + isRoleExisted);
+                if (isRoleExisted) continue;
 
                 var result = roleManager.CreateAsync(new Role { Name = role }).Result;
+                System.Diagnostics.Debug.WriteLine("CreateRoles result.Succeeded " + result.Succeeded);
                 if (!result.Succeeded)
                 {
                     throw new Exception(string.Join('\n', result.Errors));

@@ -6,8 +6,8 @@ namespace DristorApp.Data.Models
         public int Id { set; get; }
         public int Quantity { set; get; }
 
-        public ProductVariant ProductVariant { set; get; }
-        public User User { set; get; }
+        public virtual ProductVariant ProductVariant { set; get; }
+        public virtual  User User { set; get; }
 
     }
 }
