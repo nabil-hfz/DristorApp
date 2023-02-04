@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using DristorApp.Data.DTOs.Porduct;
@@ -33,13 +34,13 @@ namespace DristorApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            return await _productsRepository.GetAllAsync();
+            return await _productsRepository.GetAllProductsAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            var product = await _productsRepository.GetByIdAsync(id);
+            var product = await _productsRepository.GetProductByIdAsync(id);
 
             if (product == null)
             {
@@ -52,14 +53,16 @@ namespace DristorApp.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, [FromBody] ProductUpdateDTO dto)
         {
-            var product = await _productsRepository.GetByIdAsync(id);
+            var product = await _productsRepository.GetProductByIdAsync(id);
             if (product is null)
             {
                 return NotFound();
             }
+            if(product.Ingredients is not null)
+                product.Ingredients.Clear();
 
-            product.Ingredients.Clear();
-            product.ProductVariants.Clear();
+            if (product.ProductVariants is not null) 
+                product.ProductVariants.Clear();
 
             foreach (var ingredientId in dto.Ingredients)
             {
@@ -68,7 +71,8 @@ namespace DristorApp.Controllers
                 {
                     return NotFound();
                 }
-                product.Ingredients.Add(ingredient);
+                if (product.Ingredients is null) product.Ingredients = new Collection<Ingredient>();
+                product.Ingredients?.Add(ingredient);
             }
 
             foreach (var productVariantId in dto.ProductVariants)
@@ -78,7 +82,8 @@ namespace DristorApp.Controllers
                 {
                     return NotFound();
                 }
-                product.ProductVariants.Add(productVariant);
+                if (product.ProductVariants is null) product.ProductVariants = new Collection<ProductVariant>();
+                product.ProductVariants?.Add(productVariant);
             }
 
             product.Name = dto.Name;
@@ -112,7 +117,7 @@ namespace DristorApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            var product = await _productsRepository.GetByIdAsync(id);
+            var product = await _productsRepository.GetProductByIdAsync(id);
             if (product == null)
             {
                 return NotFound();

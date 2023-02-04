@@ -9,9 +9,9 @@ namespace DristorApp.Repositories.OrderRepository
 {
 
 
-    public class OrderRepository : ImplRepository<Order, int>, IOrderRepository
+    public class ImplOrderRepository : ImplRepository<Order, int>, IOrderRepository
     {
-        public OrderRepository(AppDbContext dbContext) : base(dbContext)
+        public ImplOrderRepository(AppDbContext dbContext) : base(dbContext)
         {
         }
 

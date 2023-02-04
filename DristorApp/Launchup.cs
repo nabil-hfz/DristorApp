@@ -112,11 +112,11 @@ namespace DristorApp
 
             services.AddScoped<IRepository<Ingredient, int>, ImplRepository<Ingredient, int>>();
             services.AddScoped<IRepository<ProductVariant, int>, ImplRepository<ProductVariant, int>>();
-            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderRepository, ImplOrderRepository>();
             services.AddScoped<IRepository<OrderStatusUpdate, int>, ImplRepository<OrderStatusUpdate, int>>();
             services.AddScoped<ICouponRepository, ImplCouponRepository>();
             services.AddScoped<IUserManagementService, ImplUserManagementService>();
-            services.AddScoped<ICartItemRepository, CartItemRepository>();
+            services.AddScoped<ICartItemRepository, ImplCartItemRepository>();
             services.AddScoped<IRepository<OrderItem, int>, ImplRepository<OrderItem, int>>();
             System.Diagnostics.Debug.WriteLine("Launchup ConfigureServices ");
         }

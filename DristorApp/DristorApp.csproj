@@ -45,9 +45,8 @@
     <None Remove="UserManagementService\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
+    <Folder Include="Data\DTOs\NewFolder\" />
     <Folder Include="Data\Models\" />
-    <Folder Include="Data\DTOs\" />
     <Folder Include="Data\DTOs\Address\" />
     <Folder Include="Data\DTOs\CartItem\" />
     <Folder Include="Data\DTOs\Coupon\" />

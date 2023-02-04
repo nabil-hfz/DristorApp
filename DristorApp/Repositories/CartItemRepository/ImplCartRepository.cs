@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 namespace DristorApp.Repositories.CartRepository
 {
 
-    public class CartItemRepository : ImplRepository<CartItem, int>, ICartItemRepository
+    public class ImplCartItemRepository : ImplRepository<CartItem, int>, ICartItemRepository
     {
-        public CartItemRepository(AppDbContext dbContext) : base(dbContext)
+        public ImplCartItemRepository(AppDbContext dbContext) : base(dbContext)
         {
         }
 

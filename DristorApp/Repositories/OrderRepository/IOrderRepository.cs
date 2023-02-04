@@ -7,7 +7,6 @@ namespace DristorApp.Repositories.OrderRepository
 {
     public interface IOrderRepository : IRepository<Order, int>
     {
-
-    }
+     }
 
 }
