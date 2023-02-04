@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\DTOs\NewFolder\**" />
+    <Content Remove="Data\DTOs\NewFolder\**" />
+    <EmbeddedResource Remove="Data\DTOs\NewFolder\**" />
+    <None Remove="Data\DTOs\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Data\" />
     <None Remove="Data\Models\" />
     <None Remove="Data\DTOs\" />
@@ -45,7 +52,6 @@
     <None Remove="UserManagementService\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\DTOs\NewFolder\" />
     <Folder Include="Data\Models\" />
     <Folder Include="Data\DTOs\Address\" />
     <Folder Include="Data\DTOs\CartItem\" />

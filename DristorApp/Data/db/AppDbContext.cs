@@ -78,6 +78,7 @@ namespace DristorApp.Data.db
 // Add-Migration EditingUserMode3
 // Add-Migration EditingUserMode4
 // Add-Migration EditingOrderItem
+// Add-Migration AddNewOrderStatusUpdateCreate
 
 // Add-Migration testingDocker
 

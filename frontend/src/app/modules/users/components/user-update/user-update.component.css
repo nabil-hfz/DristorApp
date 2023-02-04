@@ -1,0 +1,40 @@
+.buttons {
+  padding-left: 20px;
+  position: center;
+}
+
+.btn-add {
+  margin-top: 20px;
+  float: right;
+  margin-left: 20px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+mat-card {
+  margin-bottom: 1rem;
+}
+
+.button-row .mat-button-base {
+  margin: 0px 5px 5px 5px;
+}
+
+.spacer {
+  flex-grow: 99;
+}
+
+.buttons {
+  height: 50px;
+}
+
+.text-fields {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

@@ -52,7 +52,7 @@ namespace DristorApp.Controllers
         // PUT: api/OrderStatusUpdates/3
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrderStatusUpdate(int id, OrderStatusUpdateUpdateDTO orderStatusUpdateUDTO)
+        public async Task<IActionResult> PutOrderStatusUpdate(int id, OrderStatusUpdateCreateDTO orderStatusUpdateUDTO)
         {
             if (id != orderStatusUpdateUDTO.Id)
             {
