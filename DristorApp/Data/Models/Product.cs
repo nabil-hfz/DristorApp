@@ -6,8 +6,8 @@ namespace DristorApp.Data.Models
         public int Id { set; get; }
         public string Name { set; get; }
 
-        public ICollection<Ingredient> Ingredients { set; get; }
-        public ICollection<ProductVariant> ProductVariants { set; get; }
+        public virtual ICollection<Ingredient> Ingredients { set; get; }
+        public virtual ICollection<ProductVariant> ProductVariants { set; get; }
 
     }
 }

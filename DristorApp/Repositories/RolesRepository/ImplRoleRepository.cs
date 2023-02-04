@@ -1,8 +1,8 @@
-﻿using System;
-using DristorApp.Data.db;
+﻿using DristorApp.Data.db;
 using DristorApp.Data.Models;
 using DristorApp.Repositories.BaseRepository;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace DristorApp.Repositories.Roles
 {
@@ -21,11 +21,10 @@ namespace DristorApp.Repositories.Roles
 
         public async Task<Role?> GetRoleByNameAsync(string name)
         {
-            System.Diagnostics.Debug.WriteLine("ImplRoleRepository GetRoleByNameAsync name " + name);
 
-            var result =  await _DbContext.Roles.FirstOrDefaultAsync(role => role.Name == name);
-            System.Diagnostics.Debug.WriteLine("ImplRoleRepository GetRoleByNameAsync result " + result);
-
+            var result = await _DbContext.Roles.FirstOrDefaultAsync(role =>  role.Name.ToLower().StartsWith(name.ToLower())
+            || role.Name.ToLower() == name.ToLower()
+            );
             return result;
         }
     }

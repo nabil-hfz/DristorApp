@@ -11502,24 +11502,31 @@
     ]
   },
   "packageFolders": {
-    "/Users/nabil.alhafez/.nuget/packages/": {}
+    "C:\\Users\\Dell\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nabil.alhafez/Univeristetea/Anul_2/DristorApp/DristorApp/DristorApp.csproj",
+      "projectUniqueName": "C:\\Users\\Dell\\Source\\Repos\\DristorApp\\DristorApp\\DristorApp.csproj",
       "projectName": "DristorApp",
-      "projectPath": "/Users/nabil.alhafez/Univeristetea/Anul_2/DristorApp/DristorApp/DristorApp.csproj",
-      "packagesPath": "/Users/nabil.alhafez/.nuget/packages/",
-      "outputPath": "/Users/nabil.alhafez/Univeristetea/Anul_2/DristorApp/DristorApp/obj/",
+      "projectPath": "C:\\Users\\Dell\\Source\\Repos\\DristorApp\\DristorApp\\DristorApp.csproj",
+      "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dell\\Source\\Repos\\DristorApp\\DristorApp\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/nabil.alhafez/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -11610,7 +11617,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200-preview.22628.1/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

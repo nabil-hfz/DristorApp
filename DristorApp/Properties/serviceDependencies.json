@@ -2,7 +2,7 @@
   "dependencies": {
     "postgresql1": {
       "type": "postgresql",
-      "connectionId": "DristorApp",
+      "connectionId": "postgres",
       "dynamicId": null
     }
   }

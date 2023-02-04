@@ -8,7 +8,7 @@ namespace DristorApp.Data.Models
         public DateTime TimesTamp { set; get; }
 
         public int OrderId { set; get; }
-        public Order Order { set; get; }
+        public virtual Order Order { set; get; }
     }
 }
 

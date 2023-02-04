@@ -5,6 +5,7 @@ namespace DristorApp.Data.Models
 {
     public class Address
     {
+        [Key]
         public int Id { set; get; }
         public string Country { set; get; }
         public string City { set; get; }
@@ -13,7 +14,7 @@ namespace DristorApp.Data.Models
         public string PhoneNumber { set; get; }
 
         [Required]
-        public User User { set; get; }
+        public virtual User User { set; get; }
 
         public ICollection<Order> Orders { set; get; }
 

@@ -11,9 +11,9 @@ namespace DristorApp.Data.Models
         [Range(0, 100)]
         public int Discount { set; get; }
 
-        public User User { set; get; }
+        public virtual  User User { set; get; }
 
-        public OrderItem OrderItem { set; get; }
+        public virtual OrderItem OrderItem { set; get; }
     }
 }
 

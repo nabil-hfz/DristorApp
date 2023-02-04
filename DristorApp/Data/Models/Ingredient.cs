@@ -8,7 +8,7 @@ namespace DristorApp.Data.Models
         public bool Allergen { set; get; }
         public bool Spicy { set; get; }
 
-        public ICollection<Product> Products { set; get; }
+        public virtual ICollection<Product> Products { set; get; }
     }
 }
 

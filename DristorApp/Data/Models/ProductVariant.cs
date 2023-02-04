@@ -8,8 +8,8 @@
         public string Unit { set; get; }
         public float Price { set; get; }
 
-        public Product Product { set; get; }
-        public ICollection<CartItem> CartItems { set; get; }
-        public ICollection<OrderItem> OrderItems { set; get; }
+        public virtual Product Product { set; get; }
+        public virtual ICollection<CartItem> CartItems { set; get; }
+        public virtual ICollection<OrderItem> OrderItems { set; get; }
     }
 }

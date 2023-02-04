@@ -33,8 +33,8 @@ namespace DristorApp.Controllers
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                //Roles = user.Roles.Select(x => x.Name).ToList(),
-                Addresses = user.Addresses.Select(x => x.Id).ToList()
+                Roles = user.Roles is not null ? user.Roles.Select(x => x.Name).ToList():null,
+                Addresses = user.Roles is not null ?  user.Addresses.Select(x => x.Id).ToList() : null
             });
 
             return Ok(users);
@@ -43,7 +43,7 @@ namespace DristorApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetUser(int id)
         {
-            var user = await _usersRepository.GetByIdAsync(id);
+            var user = await _usersRepository.GetUserByIdAndRolesAsync(id);
             if (user is null)
             {
                 return NotFound();
@@ -68,7 +68,7 @@ namespace DristorApp.Controllers
                 return BadRequest();
             }
 
-            var realUser = await _usersRepository.GetByIdAsync(id);
+            var realUser = await _usersRepository.GetUserByIdAndRolesAsync(id);
             if (realUser is null)
             {
                 return NotFound();
@@ -131,7 +131,7 @@ namespace DristorApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await _usersRepository.GetByIdAsync(id);
+            var user = await _usersRepository.GetUserByIdAndRolesAsync(id);
             if (user == null)
             {
                 return NotFound();

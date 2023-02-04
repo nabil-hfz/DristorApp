@@ -43,8 +43,6 @@ namespace DristorApp.UserManagementService
                 throw new Exception("Customer role not found.");
             }
 
-            System.Diagnostics.Debug.WriteLine("RegisterUserAsync customerRole " + customerRole.ToString());
-
             var user = new User
             {
                 Email = dto.Email,
@@ -53,7 +51,6 @@ namespace DristorApp.UserManagementService
                 LastName = dto.LastName,
                 Roles = new List<Role> { customerRole }
             };
-            System.Diagnostics.Debug.WriteLine("RegisterUserAsync new User " + user.ToString());
 
             return await _userManager.CreateAsync(user, dto.Password);
         }
