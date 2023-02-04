@@ -17,7 +17,11 @@ namespace DristorApp.Controllers
         private readonly IRoleRepository _rolesRepository;
         private readonly IRepository<Address, int> _addressRepository;
 
-        public UsersController(IUserRepository usersRepository, IRoleRepository rolesRepository, IRepository<Address, int> addressRepository)
+        public UsersController(
+            IUserRepository usersRepository, 
+            IRoleRepository rolesRepository, 
+            IRepository<Address, int> addressRepository
+         )
         {
             _usersRepository = usersRepository;
             _rolesRepository = rolesRepository;
